@@ -27,7 +27,7 @@ public class ConfigMusculosActivity extends AppCompatActivity {
     private ListView lvMusculos;
 
     private ArrayList<Musculo> musculos = new ArrayList<>();
-    ArrayAdapter listAdapter;
+    private ArrayAdapter listAdapter;
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference musculosRef = database.getReference().child("musculos");
@@ -43,7 +43,7 @@ public class ConfigMusculosActivity extends AppCompatActivity {
         fabAddMusculo = findViewById(R.id.fabAddMusculo);
         lvMusculos = findViewById(R.id.lvMusculos);
 
-        setOnClickListeners();
+        setClickListeners();
         setListViewMusculos();
         getMusculosDB();
     }
@@ -100,7 +100,7 @@ public class ConfigMusculosActivity extends AppCompatActivity {
         binding.lvMusculos.setAdapter(listAdapter);
     }
 
-    private void setOnClickListeners(){
+    private void setClickListeners(){
         fabAddMusculo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

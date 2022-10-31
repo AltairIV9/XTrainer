@@ -6,4 +6,60 @@
     android:layout_height="match_parent"
     tools:context=".ConfigExerciciosAddExerciciosActivity">
 
+    <EditText
+        android:id="@+id/edtNomeExercicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="96dp"
+        android:ems="10"
+        android:hint="Exercício"
+        android:inputType="textCapWords"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/spnMusculosAddExercicio"
+        android:layout_width="244dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="16dp"
+        android:minHeight="32dp"
+        app:layout_constraintEnd_toEndOf="@+id/edtNomeExercicio"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="@+id/edtNomeExercicio"
+        app:layout_constraintTop_toBottomOf="@+id/edtNomeExercicio" />
+
+    <EditText
+        android:id="@+id/edtPeso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Peso inicial"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="@+id/spnMusculosAddExercicio"
+        app:layout_constraintStart_toStartOf="@+id/spnMusculosAddExercicio"
+        app:layout_constraintTop_toBottomOf="@+id/spnMusculosAddExercicio" />
+
+    <EditText
+        android:id="@+id/edtRepeticoes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Repetições iniciais"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="@+id/edtPeso"
+        app:layout_constraintStart_toStartOf="@+id/edtPeso"
+        app:layout_constraintTop_toBottomOf="@+id/edtPeso" />
+
+    <Button
+        android:id="@+id/btnAddExercicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="Adicionar Exercicio"
+        app:layout_constraintEnd_toEndOf="@+id/edtRepeticoes"
+        app:layout_constraintStart_toStartOf="@+id/edtRepeticoes"
+        app:layout_constraintTop_toBottomOf="@+id/edtRepeticoes" />
 </androidx.constraintlayout.widget.ConstraintLayout>

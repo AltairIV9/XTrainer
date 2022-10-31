@@ -4,12 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,6 +23,7 @@ import java.util.ArrayList;
 public class ConfigExerciciosActivity extends AppCompatActivity {
 
     private Spinner spnMusculos;
+    private FloatingActionButton fabAddExercicio;
 
     private ArrayList<Musculo> musculos = new ArrayList<>();
     private ArrayList<String> musculosNomes = new ArrayList<>();
@@ -35,10 +38,21 @@ public class ConfigExerciciosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_config_exercicios);
 
+        fabAddExercicio = findViewById(R.id.fabAddExercicio);
         spnMusculos = findViewById(R.id.spnMusculos);
 
+        setFAB();
         setSpinner();
         getMusculosDB();
+    }
+
+    private void setFAB(){
+        fabAddExercicio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ConfigExerciciosActivity.this, ConfigExerciciosAddExerciciosActivity.class));
+            }
+        });
     }
 
     private void setSpinner(){

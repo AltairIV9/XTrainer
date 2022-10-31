@@ -90,7 +90,6 @@ public class ConfigExerciciosAddExerciciosActivity extends AppCompatActivity {
                 }
                 String key = exerciciosRef.child(musculos.get(spnMusculosAddExercicio.getSelectedItemPosition()).getId()).push().getKey();
                 Exercicio novoExercicio = new Exercicio(edtNomeExercicio.getText().toString(), key, peso, repeticoes);
-                exerciciosRef.setValue("oi");
                 exerciciosRef.child(musculos.get(spnMusculosAddExercicio.getSelectedItemPosition()).getId()).child(key).setValue(novoExercicio);
                 finish();
             }

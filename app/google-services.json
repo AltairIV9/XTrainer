@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "962914262290",
+    "firebase_url": "https://xtrainer-d804a.firebaseio.com",
+    "project_id": "xtrainer-d804a",
+    "storage_bucket": "xtrainer-d804a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:962914262290:android:21cc89f19f3735af",
+        "android_client_info": {
+          "package_name": "com.example.walterhugo.xtrainer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "962914262290-oc0pl57hbh5nit17qhuk7gns1rjtnng8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANyzmhtfHtOf1r8MM-syrHEUIrC-dk9bI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "962914262290-oc0pl57hbh5nit17qhuk7gns1rjtnng8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:962914262290:android:79a64b2ce636e14af5a7cb",
+        "android_client_info": {
+          "package_name": "com.example.xtrainer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "962914262290-oc0pl57hbh5nit17qhuk7gns1rjtnng8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANyzmhtfHtOf1r8MM-syrHEUIrC-dk9bI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "962914262290-oc0pl57hbh5nit17qhuk7gns1rjtnng8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -22,24 +22,24 @@
         android:id="@+id/spnMusculo1"
         android:layout_width="196dp"
         android:layout_height="48dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tvMusculo1"
+        app:layout_constraintBottom_toBottomOf="@+id/tvMusculo1Aux"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.75"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvMusculo1" />
+        app:layout_constraintTop_toTopOf="@+id/tvMusculo1Aux" />
 
     <Spinner
         android:id="@+id/spnMusculo2"
         android:layout_width="196dp"
         android:layout_height="48dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tvMusculo2"
+        app:layout_constraintBottom_toBottomOf="@+id/tvMusculo2Aux"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.75"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvMusculo2" />
+        app:layout_constraintTop_toTopOf="@+id/tvMusculo2Aux" />
 
     <TextView
-        android:id="@+id/tvMusculo1"
+        android:id="@+id/tvMusculo1Aux"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
@@ -50,7 +50,7 @@
         app:layout_constraintTop_toBottomOf="@+id/edtNomeTreino" />
 
     <TextView
-        android:id="@+id/tvMusculo2"
+        android:id="@+id/tvMusculo2Aux"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
@@ -58,7 +58,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvMusculo1" />
+        app:layout_constraintTop_toBottomOf="@+id/tvMusculo1Aux" />
 
     <Button
         android:id="@+id/btnAddTreino"
@@ -68,5 +68,5 @@
         android:text="Adicionar Treino"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvMusculo2" />
+        app:layout_constraintTop_toBottomOf="@+id/tvMusculo2Aux" />
 </androidx.constraintlayout.widget.ConstraintLayout>

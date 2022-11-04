@@ -76,6 +76,7 @@ public class ConfigExerciciosActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 exercicios.clear();
+                listAdapter.notifyDataSetChanged();
                 exerciciosRef.child(musculos.get(position).getId()).addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {

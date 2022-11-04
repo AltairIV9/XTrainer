@@ -29,7 +29,7 @@ public class TreinosListAdapter extends ArrayAdapter<Treino> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item_treino, parent, false);
         }
 
-        TextView tvNomeTreino = convertView.findViewById(R.id.tvNomeTreino);
+        TextView tvNomeTreino = convertView.findViewById(R.id.tvNomeTreinoListItem);
 
         tvNomeTreino.setText(treino.getNome());
 

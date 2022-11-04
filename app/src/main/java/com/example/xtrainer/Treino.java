@@ -5,14 +5,16 @@ import java.util.ArrayList;
 public class Treino {
     private String nome;
     private String id;
-    private ArrayList<String> musculos;
+    private String musculo1;
+    private String musculo2;
 
     public Treino() {}
 
-    public Treino(String nome, String id, ArrayList<String> musculos) {
+    public Treino(String nome, String id, String musculo1, String musculo2) {
         this.nome = nome;
         this.id = id;
-        this.musculos = musculos;
+        this.musculo1 = musculo1;
+        this.musculo2 = musculo2;
     }
 
     public String getNome() {
@@ -31,11 +33,19 @@ public class Treino {
         this.id = id;
     }
 
-    public ArrayList<String> getMusculos() {
-        return musculos;
+    public String getMusculo1() {
+        return musculo1;
     }
 
-    public void setMusculos(ArrayList<String> musculos) {
-        this.musculos = musculos;
+    public void setMusculo1(String musculo1) {
+        this.musculo1 = musculo1;
+    }
+
+    public String getMusculo2() {
+        return musculo2;
+    }
+
+    public void setMusculo2(String musculo2) {
+        this.musculo2 = musculo2;
     }
 }

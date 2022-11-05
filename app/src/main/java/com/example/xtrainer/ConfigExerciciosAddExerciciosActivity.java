@@ -89,7 +89,7 @@ public class ConfigExerciciosAddExerciciosActivity extends AppCompatActivity {
                     return;
                 }
                 String key = exerciciosRef.child(musculos.get(spnMusculosAddExercicio.getSelectedItemPosition()).getId()).push().getKey();
-                Exercicio novoExercicio = new Exercicio(edtNomeExercicio.getText().toString(), key, peso, repeticoes);
+                Exercicio novoExercicio = new Exercicio(edtNomeExercicio.getText().toString(), key, musculos.get(spnMusculosAddExercicio.getSelectedItemPosition()).getId(), peso, repeticoes);
                 exerciciosRef.child(musculos.get(spnMusculosAddExercicio.getSelectedItemPosition()).getId()).child(key).setValue(novoExercicio);
                 finish();
             }

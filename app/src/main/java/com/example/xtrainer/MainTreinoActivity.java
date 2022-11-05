@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -35,8 +36,9 @@ public class MainTreinoActivity extends AppCompatActivity {
     private ArrayAdapter listAdapterExercicios1, listAdapterExercicios2;
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private DatabaseReference treinoOnlineRef = database.getReference().child("treinoOnline");
-    private DatabaseReference exerciciosFaltantesRef = database.getReference().child("exerciciosFaltantes");
+    private DatabaseReference treinoAtualRef = database.getReference().child("treinoAtual");
+    private DatabaseReference treinoOnlineRef = database.getReference().child("treinoOnline").child("treino");
+    private DatabaseReference exerciciosFaltantesRef = database.getReference().child("treinoOnline").child("exerciciosFaltantes");
     private DatabaseReference musculosRef = database.getReference().child("musculos");
     private DatabaseReference exerciciosRef = database.getReference().child("exercicios");
 
@@ -61,13 +63,21 @@ public class MainTreinoActivity extends AppCompatActivity {
         btnIniciarTreino.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                treinoOnlineRef.setValue(treino);
+                exerciciosFaltantesRef.setValue(null);
+                for(Exercicio exercicio : exercicios1){
+                    exerciciosFaltantesRef.child(exercicio.getId()).setValue(exercicio);
+                }
+                for(Exercicio exercicio : exercicios2){
+                    exerciciosFaltantesRef.child(exercicio.getId()).setValue(exercicio);
+                }
+                startActivity(new Intent(MainTreinoActivity.this, MainTreinoOnlineActivity.class));
             }
         });
     }
 
     private void getTreinoOnlineDB(){
-        treinoOnlineRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        treinoAtualRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 treino = snapshot.getValue(Treino.class);

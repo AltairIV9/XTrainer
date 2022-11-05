@@ -21,6 +21,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -31,9 +32,12 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Treino> treinos = new ArrayList<>();
     private ArrayAdapter listAdapter;
 
+    private Treino treinoOnline;
+
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference treinosRef = database.getReference().child("treinos");
-    private DatabaseReference treinoOnlineRef = database.getReference().child("treinoOnline");
+    private DatabaseReference treinoAtualRef = database.getReference().child("treinoAtual");
+    private DatabaseReference treinoOnlineRef = database.getReference().child("treinoOnline").child("treino");
 
     ActivityMainBinding binding;
 
@@ -58,8 +62,12 @@ public class MainActivity extends AppCompatActivity {
         binding.lvTreinos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                treinoOnlineRef.setValue(treinos.get(position));
-                startActivity(new Intent(MainActivity.this, MainTreinoActivity.class));
+                if(treinoOnline != null && treinos.get(position).getId().equals(treinoOnline.getId())){
+                    startActivity(new Intent(MainActivity.this, MainTreinoOnlineActivity.class));
+                }else {
+                    treinoAtualRef.setValue(treinos.get(position));
+                    startActivity(new Intent(MainActivity.this, MainTreinoActivity.class));
+                }
             }
         });
     }
@@ -104,6 +112,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        treinoOnlineRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                treinoOnline = snapshot.getValue(Treino.class);
             }
 
             @Override

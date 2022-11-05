@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainTreinoOnlineActivity">
+
+    <TextView
+        android:id="@+id/tvNomeExercicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="128dp"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvAquecimento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvNomeExercicio"
+        app:layout_constraintStart_toStartOf="@+id/tvNomeExercicio"
+        app:layout_constraintTop_toBottomOf="@+id/tvNomeExercicio" />
+
+    <TextView
+        android:id="@+id/tvPeso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvAquecimento"
+        app:layout_constraintStart_toStartOf="@+id/tvAquecimento"
+        app:layout_constraintTop_toBottomOf="@+id/tvAquecimento" />
+
+    <TextView
+        android:id="@+id/tvRepeticoes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvPeso"
+        app:layout_constraintStart_toStartOf="@+id/tvPeso"
+        app:layout_constraintTop_toBottomOf="@+id/tvPeso" />
+
+    <ImageButton
+        android:id="@+id/btnPesoMenos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/tvPeso"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintStart_toEndOf="@+id/tvPeso"
+        app:layout_constraintTop_toTopOf="@+id/tvPeso"
+        app:srcCompat="@drawable/ic_baseline_remove_24" />
+
+    <ImageButton
+        android:id="@+id/btnPesoMais"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/btnPesoMenos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnPesoMenos"
+        app:layout_constraintTop_toTopOf="@+id/btnPesoMenos"
+        app:srcCompat="@drawable/ic_baseline_add_24" />
+
+    <ImageButton
+        android:id="@+id/btnRepMenos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/tvRepeticoes"
+        app:layout_constraintEnd_toEndOf="@+id/btnPesoMenos"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintStart_toStartOf="@+id/btnPesoMenos"
+        app:layout_constraintTop_toTopOf="@+id/tvRepeticoes"
+        app:srcCompat="@drawable/ic_baseline_remove_24" />
+
+    <ImageButton
+        android:id="@+id/btnRepMais"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/tvRepeticoes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnRepMenos"
+        app:layout_constraintTop_toTopOf="@+id/tvRepeticoes"
+        app:srcCompat="@drawable/ic_baseline_add_24" />
+
+    <Button
+        android:id="@+id/btnFeito"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="Feito"
+        app:layout_constraintEnd_toEndOf="@+id/tvRepeticoes"
+        app:layout_constraintStart_toStartOf="@+id/tvRepeticoes"
+        app:layout_constraintTop_toBottomOf="@+id/tvRepeticoes" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

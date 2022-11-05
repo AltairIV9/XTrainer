@@ -88,6 +88,17 @@ public class MainAddTreinoActivity extends AppCompatActivity {
                         }
                     }
                 }
+                if(musculos.size() == 0){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainAddTreinoActivity.this);
+
+                    builder.setTitle("Não há músculos!")
+                            .setMessage("Adicione músculos nas configurações.")
+                            .setPositiveButton("ok", null);
+
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                    return;
+                }
                 if(spnMusculo1.getSelectedItemPosition() == spnMusculo2.getSelectedItemPosition()){
                     AlertDialog.Builder builder = new AlertDialog.Builder(MainAddTreinoActivity.this);
 

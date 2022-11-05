@@ -29,9 +29,9 @@ public class ExerciciosListAdapter extends ArrayAdapter<Exercicio> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item_exercicio, parent, false);
         }
 
-        TextView tvNomeExercicio = convertView.findViewById(R.id.tvNomeExercicio);
+        TextView tvNomeExercicioListItem = convertView.findViewById(R.id.tvNomeExercicioListItem);
 
-        tvNomeExercicio.setText(exercicio.getNome());
+        tvNomeExercicioListItem.setText(exercicio.getNome());
 
         return convertView;
     }

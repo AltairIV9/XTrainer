@@ -19,10 +19,10 @@ public class ConfigActivity extends AppCompatActivity {
         btnConfigMusculos = findViewById(R.id.btnConfigMusculos);
         btnConfigExercicios = findViewById(R.id.btnConfigExercicios);
 
-        setOnClickListeners();
+        setButtons();
     }
 
-    private void setOnClickListeners(){
+    private void setButtons(){
         btnConfigMusculos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -38,39 +38,26 @@ public class ConfigMusculosAddMusculosActivity extends AppCompatActivity {
         edtNomeMusculo.requestFocus();
 
         getMusculosDB();
-        addOnClickListeners();
+        setButtons();
     }
 
     private void getMusculosDB(){
         musculosRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                musculos.add(snapshot.getValue(Musculo.class));
+                Musculo novoMusculo = snapshot.getValue(Musculo.class);
+                if(novoMusculo != null) {
+                    musculos.add(novoMusculo);
+                }
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                Musculo changedMusculo = snapshot.getValue(Musculo.class);
-                if(changedMusculo !=null) {
-                    for (int i = 0; i < musculos.size(); i++) {
-                        if (musculos.get(i).getId().equals(changedMusculo.getId())) {
-                            musculos.remove(i);
-                            musculos.add(i, changedMusculo);
-                        }
-                    }
-                }
+
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-                Musculo removedMusculo = snapshot.getValue(Musculo.class);
-                if(removedMusculo != null) {
-                    for (int i = 0; i < musculos.size(); i++) {
-                        if (musculos.get(i).getId().equals(removedMusculo.getId())) {
-                            musculos.remove(i);
-                        }
-                    }
-                }
             }
 
             @Override
@@ -85,7 +72,7 @@ public class ConfigMusculosAddMusculosActivity extends AppCompatActivity {
         });
     }
 
-    private void addOnClickListeners(){
+    private void setButtons(){
         btnAddMusculo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

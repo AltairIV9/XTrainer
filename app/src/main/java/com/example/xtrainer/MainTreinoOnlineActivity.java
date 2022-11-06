@@ -93,7 +93,7 @@ public class MainTreinoOnlineActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(exercicios.size() > 0) {
-                    exerciciosFaltantesRef.child(exercicios.get(0).getId()).setValue(null);
+                    exerciciosFaltantesRef.child(exercicios.get(0).getId()).removeValue();
                     exercicios.remove(0);
 
                     if (exercicios.size() > 0) {
@@ -110,7 +110,7 @@ public class MainTreinoOnlineActivity extends AppCompatActivity {
                         btnPesoMais.setVisibility(View.INVISIBLE);
                         btnRepMenos.setVisibility(View.INVISIBLE);
                         btnRepMais.setVisibility(View.INVISIBLE);
-                        treinoOnlineRef.setValue(null);
+                        treinoOnlineRef.removeValue();
                     }
                 }else{
                     finish();

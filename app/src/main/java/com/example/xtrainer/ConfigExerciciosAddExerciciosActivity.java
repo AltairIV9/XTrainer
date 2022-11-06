@@ -50,11 +50,11 @@ public class ConfigExerciciosAddExerciciosActivity extends AppCompatActivity {
         edtNomeExercicio.requestFocus();
 
         setSpinner();
-        setOnClickListener();
+        setButtons();
         getMusculosDB();
     }
 
-    private void setOnClickListener(){
+    private void setButtons(){
         btnAddExercicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,39 +106,20 @@ public class ConfigExerciciosAddExerciciosActivity extends AppCompatActivity {
         musculosRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                musculos.add(snapshot.getValue(Musculo.class));
-                musculosNomes.add(musculos.get(musculos.size() - 1).getNome());
-                spinnerArrayAdapter.notifyDataSetChanged();
+                Musculo novoMusculo = snapshot.getValue(Musculo.class);
+                if(novoMusculo != null) {
+                    musculos.add(novoMusculo);
+                    musculosNomes.add(novoMusculo.getNome());
+                    spinnerArrayAdapter.notifyDataSetChanged();
+                }
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                Musculo changedMusculo = snapshot.getValue(Musculo.class);
-                if (changedMusculo != null) {
-                    for (int i = 0; i < musculos.size(); i++) {
-                        if (musculos.get(i).getId().equals(changedMusculo.getId())) {
-                            musculos.remove(i);
-                            musculosNomes.remove(i);
-                            musculos.add(i, changedMusculo);
-                            musculosNomes.add(i, changedMusculo.getNome());
-                            spinnerArrayAdapter.notifyDataSetChanged();
-                        }
-                    }
-                }
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-                Musculo removedMusculo = snapshot.getValue(Musculo.class);
-                if (removedMusculo != null) {
-                    for (int i = 0; i < musculos.size(); i++) {
-                        if (musculos.get(i).getId().equals(removedMusculo.getId())) {
-                            musculos.remove(i);
-                            musculosNomes.remove(i);
-                            spinnerArrayAdapter.notifyDataSetChanged();
-                        }
-                    }
-                }
             }
 
             @Override

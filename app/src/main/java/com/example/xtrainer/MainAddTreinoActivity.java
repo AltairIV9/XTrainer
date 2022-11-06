@@ -47,7 +47,7 @@ public class MainAddTreinoActivity extends AppCompatActivity {
         btnAddTreino = findViewById(R.id.btnAddTreino);
 
         setSpinnerMusculos();
-        setOnClickListener();
+        setButtons();
         getMusculosDB();
         getTreinosDB();
     }
@@ -59,7 +59,7 @@ public class MainAddTreinoActivity extends AppCompatActivity {
         spnMusculo2.setAdapter(spinnerArrayAdapter);
     }
 
-    private void setOnClickListener() {
+    private void setButtons() {
         btnAddTreino.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

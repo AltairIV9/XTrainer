@@ -2,11 +2,14 @@ package com.example.xtrainer;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
@@ -64,7 +67,7 @@ public class MainTreinoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 treinoOnlineRef.setValue(treino);
-                exerciciosFaltantesRef.setValue(null);
+                exerciciosFaltantesRef.removeValue();
                 for(Exercicio exercicio : exercicios1){
                     exerciciosFaltantesRef.child(exercicio.getId()).setValue(exercicio);
                 }
@@ -98,40 +101,51 @@ public class MainTreinoActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 musculo1 = snapshot.getValue(Musculo.class);
-                tvMusculo1.setText(musculo1.getNome());
+                if(tvMusculo1 != null) {
+                    tvMusculo1.setText(musculo1.getNome());
 
-                listAdapterExercicios1 = new TreinoExerciciosListAdapter(MainTreinoActivity.this, exercicios1);
-                binding.lvExercicios1.setAdapter(listAdapterExercicios1);
-                exerciciosRef.child(musculo1.getId()).addChildEventListener(new ChildEventListener() {
-                    @Override
-                    public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                        Exercicio novoExercicio = snapshot.getValue(Exercicio.class);
-                        if(novoExercicio != null){
-                            exercicios1.add(novoExercicio);
-                            listAdapterExercicios1.notifyDataSetChanged();
+                    listAdapterExercicios1 = new TreinoExerciciosListAdapter(MainTreinoActivity.this, exercicios1);
+                    binding.lvExercicios1.setAdapter(listAdapterExercicios1);
+                    exerciciosRef.child(musculo1.getId()).addChildEventListener(new ChildEventListener() {
+                        @Override
+                        public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                            Exercicio novoExercicio = snapshot.getValue(Exercicio.class);
+                            if (novoExercicio != null) {
+                                exercicios1.add(novoExercicio);
+                                listAdapterExercicios1.notifyDataSetChanged();
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                        @Override
+                        public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
-                    }
+                        }
 
-                    @Override
-                    public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+                        @Override
+                        public void onChildRemoved(@NonNull DataSnapshot snapshot) {
 
-                    }
+                        }
 
-                    @Override
-                    public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                        @Override
+                        public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
-                    }
+                        }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                });
+                        }
+                    });
+                }else{
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainTreinoActivity.this);
+
+                    builder.setTitle("Músculo não encontrado!")
+                            .setMessage("O músculo 1 do treino não foi encontrado. Crie o treino novamente.")
+                            .setPositiveButton("Ok", null);
+
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                }
             }
 
             @Override
@@ -144,40 +158,51 @@ public class MainTreinoActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 musculo2 = snapshot.getValue(Musculo.class);
-                tvMusculo2.setText(musculo2.getNome());
+                if(musculo2 != null) {
+                    tvMusculo2.setText(musculo2.getNome());
 
-                listAdapterExercicios2 = new TreinoExerciciosListAdapter(MainTreinoActivity.this, exercicios2);
-                binding.lvExercicios2.setAdapter(listAdapterExercicios2);
-                exerciciosRef.child(musculo2.getId()).addChildEventListener(new ChildEventListener() {
-                    @Override
-                    public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                        Exercicio novoExercicio = snapshot.getValue(Exercicio.class);
-                        if(novoExercicio != null){
-                            exercicios2.add(novoExercicio);
-                            listAdapterExercicios2.notifyDataSetChanged();
+                    listAdapterExercicios2 = new TreinoExerciciosListAdapter(MainTreinoActivity.this, exercicios2);
+                    binding.lvExercicios2.setAdapter(listAdapterExercicios2);
+                    exerciciosRef.child(musculo2.getId()).addChildEventListener(new ChildEventListener() {
+                        @Override
+                        public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                            Exercicio novoExercicio = snapshot.getValue(Exercicio.class);
+                            if (novoExercicio != null) {
+                                exercicios2.add(novoExercicio);
+                                listAdapterExercicios2.notifyDataSetChanged();
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                        @Override
+                        public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
-                    }
+                        }
 
-                    @Override
-                    public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+                        @Override
+                        public void onChildRemoved(@NonNull DataSnapshot snapshot) {
 
-                    }
+                        }
 
-                    @Override
-                    public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                        @Override
+                        public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
-                    }
+                        }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                });
+                        }
+                    });
+                }else{
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainTreinoActivity.this);
+
+                    builder.setTitle("Músculo não encontrado!")
+                            .setMessage("O músculo 2 do treino não foi encontrado. Crie o treino novamente.")
+                            .setPositiveButton("Ok", null);
+
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                }
             }
 
             @Override

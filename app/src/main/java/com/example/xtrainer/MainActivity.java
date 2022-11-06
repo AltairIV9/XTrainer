@@ -2,9 +2,11 @@ package com.example.xtrainer;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -51,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         fabAddTreino = findViewById(R.id.fabAddTreino);
 
         setListViewTreinos();
-        setClickListener();
+        setButtons();
         getTreinosDB();
     }
 
@@ -70,9 +72,31 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        binding.lvTreinos.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+
+                builder.setTitle("Excluir treino!")
+                                .setMessage("Deseja realmente excluir o treino "  + treinos.get(position).getNome() + "?")
+                                .setNegativeButton("Não", null)
+                                .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        treinosRef.child(treinos.get(position).getId()).removeValue();
+                                        treinos.remove(position);
+                                        listAdapter.notifyDataSetChanged();
+                                    }
+                                });
+
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+                return false;
+            }
+        });
     }
 
-    private void setClickListener(){
+    private void setButtons(){
         btnConfigActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

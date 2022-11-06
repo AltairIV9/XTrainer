@@ -2,8 +2,10 @@ package com.example.xtrainer;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -52,19 +54,10 @@ public class ConfigExerciciosActivity extends AppCompatActivity {
         spnMusculos = findViewById(R.id.spnMusculos);
         lvExercicios = findViewById(R.id.lvExercicios);
 
-        setClickListeners();
+        setButtons();
         setSpinner();
         setListViewExercicios();
         getMusculosDB();
-    }
-
-    private void setClickListeners(){
-        fabAddExercicio.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ConfigExerciciosActivity.this, ConfigExerciciosAddExerciciosActivity.class));
-            }
-        });
     }
 
     private void setSpinner(){
@@ -80,8 +73,11 @@ public class ConfigExerciciosActivity extends AppCompatActivity {
                 exerciciosRef.child(musculos.get(position).getId()).addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                        exercicios.add(snapshot.getValue(Exercicio.class));
-                        listAdapter.notifyDataSetChanged();
+                        Exercicio novoExercicio = snapshot.getValue(Exercicio.class);
+                        if(novoExercicio != null) {
+                            exercicios.add(novoExercicio);
+                            listAdapter.notifyDataSetChanged();
+                        }
                     }
 
                     @Override
@@ -116,45 +112,51 @@ public class ConfigExerciciosActivity extends AppCompatActivity {
     private void setListViewExercicios(){
         listAdapter = new ExerciciosListAdapter(ConfigExerciciosActivity.this, exercicios);
         binding.lvExercicios.setAdapter(listAdapter);
+        binding.lvExercicios.setClickable(true);
+        binding.lvExercicios.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(ConfigExerciciosActivity.this);
+                builder.setTitle("Excluir exercício!")
+                        .setMessage("Deseja realmente excluir o exercício " + exercicios.get(position).getNome() + "?")
+                        .setNegativeButton("Não", null)
+                        .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                exerciciosRef.child(musculos.get(spnMusculos.getSelectedItemPosition()).getId()).child(exercicios.get(position).getId()).removeValue();
+                                exercicios.remove(position);
+                                listAdapter.notifyDataSetChanged();
+                            }
+                        });
+
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+
+                return false;
+            }
+        });
     }
 
     private void getMusculosDB(){
         musculosRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                musculos.add(snapshot.getValue(Musculo.class));
-                musculosNomes.add(musculos.get(musculos.size()-1).getNome());
-                spinnerArrayAdapter.notifyDataSetChanged();
+                Musculo novoMusculo = snapshot.getValue(Musculo.class);
+                if(novoMusculo != null) {
+                    musculos.add(novoMusculo);
+                    musculosNomes.add(novoMusculo.getNome());
+                    spinnerArrayAdapter.notifyDataSetChanged();
+                }
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                Musculo changedMusculo = snapshot.getValue(Musculo.class);
-                if(changedMusculo !=null) {
-                    for (int i = 0; i < musculos.size(); i++) {
-                        if (musculos.get(i).getId().equals(changedMusculo.getId())) {
-                            musculos.remove(i);
-                            musculosNomes.remove(i);
-                            musculos.add(i, changedMusculo);
-                            musculosNomes.add(i, changedMusculo.getNome());
-                            spinnerArrayAdapter.notifyDataSetChanged();
-                        }
-                    }
-                }
+
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-                Musculo removedMusculo = snapshot.getValue(Musculo.class);
-                if(removedMusculo != null) {
-                    for (int i = 0; i < musculos.size(); i++) {
-                        if (musculos.get(i).getId().equals(removedMusculo.getId())) {
-                            musculos.remove(i);
-                            musculosNomes.remove(i);
-                            spinnerArrayAdapter.notifyDataSetChanged();
-                        }
-                    }
-                }
+
             }
 
             @Override
@@ -165,6 +167,15 @@ public class ConfigExerciciosActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+    }
+
+    private void setButtons(){
+        fabAddExercicio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ConfigExerciciosActivity.this, ConfigExerciciosAddExerciciosActivity.class));
             }
         });
     }
